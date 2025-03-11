@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Estetik</title>
+    <style>
+        :root {
+            --primary-color: #8c6daf;
+            --secondary-color: #f0e6ff;
+            --accent-color: #b197d4;
+            --text-color: #333333;
+            --light-text: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f6ff;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(140, 109, 175, 0.2);
+            background-color: white;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 8%),
+                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.2) 0%, transparent 10%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 6%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 12%);
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            display: block;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-picture:hover {
+            transform: scale(1.05);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        main {
+            padding: 30px;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .info-item:hover {
+            background-color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+        
+        .info-label {
+            width: 140px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .skill-container {
+            margin-top: 20px;
+        }
+        
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        .hobby-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .hobby-tag {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        
+        .hobby-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .edit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: block;
+            margin: 20px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(140, 109, 175, 0.3);
+        }
+        
+        .edit-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(140, 109, 175, 0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--light-text);
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(140, 109, 175, 0.1);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            main {
+                padding: 20px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="animated-bg"></div>
+            <div class="profile-header">
+                <img src="assets/Proyek Baru 1 [9AA4311].png" alt="Foto Profil" class="profile-picture" id="profilePic">
+                <h1 id="fullName">Nama Lengkap</h1>
+                <p class="subtitle" id="profession">Profesi / Jabatan</p>
+                <div class="social-icons">
+                    <div class="social-icon">
+                        <i>📱</i>
+                    </div>
+                    <div class="social-icon">
+                        <i>📧</i>
+                    </div>
+                    <div class="social-icon">
+                        <i>📷</i>
+                    </div>
+                    <div class="social-icon">
+                        <i>🔗</i>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="info-section" style="animation-delay: 0.1s;">
+                <h2 class="section-title">Data Pribadi</h2>
+                <div class="info-item">
+                    <div class="info-label">Nama Lengkap</div>
+                    <div class="info-value" id="nameValue">Nama Lengkap</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Tempat, Tgl Lahir</div>
+                    <div class="info-value" id="birthValue">Kota, 1 Januari 2000</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Jenis Kelamin</div>
+                    <div class="info-value" id="genderValue">Laki-laki / Perempuan</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Alamat</div>
+                    <div class="info-value" id="addressValue">Jl. Contoh No. 123, Kota, Provinsi</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value" id="emailValue">email@contoh.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Telepon</div>
+                    <div class="info-value" id="phoneValue">081234567890</div>
+                </div>
+            </section>
+            
+            <section class="info-section" style="animation-delay: 0.2s;">
+                <h2 class="section-title">Pendidikan</h2>
+                <div class="info-item">
+                    <div class="info-label">Jurusan</div>
+                    <div class="info-value" id="educationValue">S1 Teknik Informatika</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Asal Sekolah</div>
+                    <div class="info-value" id="institutionValue">Universitas Contoh Indonesia</div>
+                </div>
+            </section>
+            
+            <section class="info-section" style="animation-delay: 0.3s;">
+                <h2 class="section-title">Keterampilan</h2>
+                <div class="skill-container">
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML & CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript</span>
+                            <span>20%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="20"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Desain Grafis</span>
+                            <span>45%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="45"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Komunikasi</span>
+                            <span>50%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="50"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="info-section" style="animation-delay: 0.4s;">
+                <h2 class="section-title">Hobi</h2>
+                <div class="hobby-list">
+                    <div class="hobby-tag">Membaca</div>
+                    <div class="hobby-tag">Traveling</div>
+                    <div class="hobby-tag">Fotografi</div>
+                    <div class="hobby-tag">Coding</div>
+                    <div class="hobby-tag">Musik</div>
+                    <div class="hobby-tag">Olahraga</div>
+                </div>
+            </section>
+            
+            <button class="edit-btn" id="editBtn">Edit Biodata</button>
+        </main>
+        
+        <footer>
+            <p>© 2025 • Dibuat dengan ❤️ oleh <span id="creatorName">Nama Kamu</span></p>
+        </footer>
+    </div>
+    
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Biodata</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="biodataForm">
+                <div class="form-group">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" id="nameInput" placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Profesi</label>
+                    <input type="text" class="form-input" id="professionInput" placeholder="Masukkan profesi">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tempat, Tanggal Lahir</label>
+                    <input type="text" class="form-input" id="birthInput" placeholder="Kota, 1 Januari 2000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <input type="text" class="form-input" id="genderInput" placeholder="Laki-laki / Perempuan">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Alamat</label>
+                    <input type="text" class="form-input" id="addressInput" placeholder="Masukkan alamat lengkap">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="emailInput" placeholder="email@contoh.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telepon</label>
+                    <input type="text" class="form-input" id="phoneInput" placeholder="081234567890">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Pendidikan Terakhir</label>
+                    <input type="text" class="form-input" id="educationInput" placeholder="S1 Teknik Informatika">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Institusi</label>
+                    <input type="text" class="form-input" id="institutionInput" placeholder="Universitas Contoh Indonesia">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nama Pembuat</label>
+                    <input type="text" class="form-input" id="creatorInput" placeholder="Nama Kamu">
+                </div>
+                <button type="submit" class="submit-btn">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Jalankan animasi ketika halaman sudah dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi skill bar
+            const skillBars = document.querySelectorAll('.skill-progress');
+            setTimeout(() => {
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width') + '%';
+                    bar.style.width = width;
+                });
+            }, 500);
+            
+            // Animasi fade in untuk section
+            const sections = document.querySelectorAll('.info-section');
+            sections.forEach(section => {
+                const delay = section.style.animationDelay || '0s';
+                setTimeout(() => {
+                    section.style.opacity = 1;
+                }, parseFloat(delay) * 1000);
+            });
+            
+            // Data default
+            const defaultData = {
+                name: "Nama Lengkap",
+                profession: "Profesi / Jabatan",
+                birth: "Kota, 1 Januari 2000",
+                gender: "Laki-laki / Perempuan",
+                address: "Jl. Contoh No. 123, Kota, Provinsi",
+                email: "email@contoh.com",
+                phone: "081234567890",
+                education: "S1 Teknik Informatika",
+                institution: "Universitas Contoh Indonesia",
+                creator: "Nama Kamu"
+            };
+            
+            // Ambil data dari localStorage jika ada
+            const storedData = localStorage.getItem('biodataEstetik');
+            const userData = storedData ? JSON.parse(storedData) : defaultData;
+            
+            // Fungsi untuk menampilkan data
+            function displayData() {
+                document.getElementById('fullName').textContent = userData.name;
+                document.getElementById('profession').textContent = userData.profession;
+                document.getElementById('nameValue').textContent = userData.name;
+                document.getElementById('birthValue').textContent = userData.birth;
+                document.getElementById('genderValue').textContent = userData.gender;
+                document.getElementById('addressValue').textContent = userData.address;
+                document.getElementById('emailValue').textContent = userData.email;
+                document.getElementById('phoneValue').textContent = userData.phone;
+                document.getElementById('educationValue').textContent = userData.education;
+                document.getElementById('institutionValue').textContent = userData.institution;
+                document.getElementById('creatorName').textContent = userData.creator;
+            }
+            
+            // Jalankan fungsi display data
+            displayData();
+            
+            // Form handling
+            const biodataForm = document.getElementById('biodataForm');
+            const editBtn = document.getElementById('editBtn');
+            const editModal = document.getElementById('editModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Buka modal edit
+            editBtn.addEventListener('click', function() {
+                // Isi form dengan data yang ada
+                document.getElementById('nameInput').value = userData.name;
+                document.getElementById('professionInput').value = userData.profession;
+                document.getElementById('birthInput').value = userData.birth;
+                document.getElementById('genderInput').value = userData.gender;
+                document.getElementById('addressInput').value = userData.address;
+                document.getElementById('emailInput').value = userData.email;
+                document.getElementById('phoneInput').value = userData.phone;
+                document.getElementById('educationInput').value = userData.education;
+                document.getElementById('institutionInput').value = userData.institution;
+                document.getElementById('creatorInput').value = userData.creator;
+                
+                // Tampilkan modal
+                editModal.style.display = 'flex';
+                setTimeout(() => {
+                    editModal.classList.add('active');
+                }, 10);
+            });
+            
+            // Tutup modal
+            closeModal.addEventListener('click', function() {
+                editModal.classList.remove('active');
+                setTimeout(() => {
+                    editModal.style.display = 'none';
+                }, 300);
+            });
+            
+            // Klik di luar modal untuk menutup
+            editModal.addEventListener('click', function(event) {
+                if (event.target === editModal) {
+                    closeModal.click();
+                }
+            });
+            
+            // Simpan perubahan form
+            biodataForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Update data
+                userData.name = document.getElementById('nameInput').value || defaultData.name;
+                userData.profession = document.getElementById('professionInput').value || defaultData.profession;
+                userData.birth = document.getElementById('birthInput').value || defaultData.birth;
+                userData.gender = document.getElementById('genderInput').value || defaultData.gender;
+                userData.address = document.getElementById('addressInput').value || defaultData.address;
+                userData.email = document.getElementById('emailInput').value || defaultData.email;
+                userData.phone = document.getElementById('phoneInput').value || defaultData.phone;
+                userData.education = document.getElementById('educationInput').value || defaultData.education;
+                userData.institution = document.getElementById('institutionInput').value || defaultData.institution;
+                userData.creator = document.getElementById('creatorInput').value || defaultData.creator;
+                
+                // Simpan ke localStorage
+                localStorage.setItem('biodataEstetik', JSON.stringify(userData));
+                
+                // Update tampilan
+                displayData();
+                
+                // Tutup modal
+                closeModal.click();
+                
+                // Tampilkan notifikasi kecil
+                const notification = document.createElement('div');
+                notification.textContent = 'Biodata berhasil diperbarui!';
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.right = '20px';
+                notification.style.backgroundColor = 'var(--primary-color)';
+                notification.style.color = 'white';
+                notification.style.padding = '12px 25px';
+                notification.style.borderRadius = '30px';
+                notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                notification.style.zIndex = '1000';
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(20px)';
+                notification.style.transition = 'all 0.3s ease';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateY(0)';
+                }, 10);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            });
+            
+            // Efek klik pada foto profil (contoh)
+            const profilePic = document.getElementById('profilePic');
+            profilePic.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
